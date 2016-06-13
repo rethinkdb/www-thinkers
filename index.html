@@ -3,63 +3,76 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <script src="https://use.typekit.net/jbu2fes.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
 
       <title>Thinker Doll Signup</title>
     <meta name="description" content="Thinker Doll Signup">
 
-    <link rel="stylesheet" href="css/styles.css">
-
+    <link rel="stylesheet" href="css/styles.css?">
+    <link href="//db.onlinewebfonts.com/c/a1f600f31b650cbfd39d6b4b975bc0ab?family=Cowboy" rel="stylesheet" type="text/css"/>
   </head>
-
+<div class="container-fluid">
   <body>
     <script src="js/scripts.js"></script>
       <header class="hero">
         <h1>Support RethinkDB, get a Thinker doll!</h1>
-          <img src="assets/woofoo-banner.png">
+          <img src="assets/woofoo-banner.png" style="height:400px;">
       </header>
 
       <section class="form">
 
-        <h2>Tell us a little about yourself</h2>
-
-          <form action="/my-handling/form-page">
-
-            <div>
-              <label for="name">Name:</label>
-                <input type="text" id="name" />
+        <h2>Tell us a little about yourself:</h2>
+ 
+         <form  action="/my-handling/form-page">
+           <div>
+             <input class="form-control" type="text" id="name" placeholder="Name (required)"/>
+           </div>
+           <div>
+             <input class="form-control" type="text" id="handle" placeholder="Github handle (required)"/>
+           </div>
+           <div>
+             <input class="form-control" type="text" id="email" placeholder="Email address (required)"/>
             </div>
+        </form></section>
+ 
+       <h2 style="margin-bottom: -.5em";>Tell us where to send your Thinker:*</h2>
+        <h3>*We can't ship Thinkers outside the continental U.S. Sorry!
+        </h3>
+ 
 
+      <section>
+        <form action="/my-handling/form-page2">
             <div>
-              <label for="GitHub Handle">GH handle:</label>
-                <input type="text" id="handle" />
-            </div>
-            <div>
-              <label for="email">Email</label>
-                <input type="email" id="email" />
-            </div>
-
-            </form>
-        </section>
-
-
-        <h2>Tell us where to send your Thinker</h2>
-
-          <form action="/my-handling/form-page2">
-            <div>
-              <label for="street">Street Address:</label>
-              <input type="text" id="street" />
+                <input class="form-control" type="text" id="address1" placeholder="Address 1 (required)" />
             </div>
             <div>
-              <label for="city">City:</label>
-              <input type="text" id="city" />
+                <input class="form-control" type="text" id="address2" placeholder="Address 2"/>
             </div>
             <div>
-              <label for="state">State:</label>
-              <input type="text" id="state" />
+                <input class="form-control" type="text" id="city" placeholder="City (required)"/>
             </div>
+            <div>
+              <select name="state" placeholder="State">
+                <option value="State (required)">State</option>
+                <option value="CA">CA</option>
+                <option value="TN">TN</option>
+                <option value="UT">UT</option>
+                <option value="NY">NY</option>
+                <option value="OR">OR</option>
+               </select>
+            </div>
+            <div>
+                <input class="form-control" type="text" id="zip" placeholder="Zip code (required)"/>
+            </div>
+            <div><br>
+                <textarea name="message" rows="6" cols="30" placeholder="Special notes?"></textarea>
+            </div>
+            
+        </form>
+      </section>
+       <button class="btn btn-primary" type="submit" value="Submit">Send me my Thinker!</button>
 
-
-      </div>
-</body>
-
+    </body>
+  </div>
 </html>
