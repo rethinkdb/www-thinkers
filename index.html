@@ -1,22 +1,21 @@
 <!doctype html>
 
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <script src="https://use.typekit.net/jbu2fes.js"></script>
-    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    <head>
+      <meta charset="utf-8">
+      <script src="https://use.typekit.net/jbu2fes.js"></script>
+      <script>try{Typekit.load({ async: true });}catch(e){}</script>
 
       <title>Thinker Doll Signup</title>
-    <meta name="description" content="Thinker Doll Signup">
+      <meta name="description" content="Thinker Doll Signup">
 
-    <link rel="stylesheet" href="css/styles.css?">
-    <link href="//db.onlinewebfonts.com/c/a1f600f31b650cbfd39d6b4b975bc0ab?family=Cowboy" rel="stylesheet" type="text/css"/>
-  </head>
+      <link rel="stylesheet" href="css/styles.css?">
+    </head>
 <div class="container-fluid">
   <body>
-    <script src="js/scripts.js"></script>
+    <script src="js/thinker-dolls.js"></script>
       <header class="hero">
-        <h1>Support RethinkDB, get a Thinker doll!</h1>
+          <h1>Support RethinkDB, get a Thinker doll!</h1>
           <img src="assets/woofoo-banner.png" style="height:400px;">
       </header>
 
@@ -36,12 +35,17 @@
             </div>
         </form></section>
  
-       <h2 style="margin-bottom: -.5em";>Tell us where to send your Thinker:*</h2>
-        <h3>*We can't ship Thinkers outside the continental U.S. Sorry!
-        </h3>
+       <h2 style="margin-bottom: -.5em";>
+
+        Tell us where to send your Thinker:*
+       </h2>
+
+       <h3>
+          *We can't ship Thinkers outside the continental U.S. Sorry!
+       </h3>
  
 
-      <section>
+      <section class="form">
         <form action="/my-handling/form-page2">
             <div>
                 <input class="form-control" type="text" id="address1" placeholder="Address 1 (required)" />
@@ -65,14 +69,32 @@
             <div>
                 <input class="form-control" type="text" id="zip" placeholder="Zip code (required)"/>
             </div>
-            <div><br>
+            <div>
                 <textarea name="message" rows="6" cols="30" placeholder="Special notes?"></textarea>
             </div>
             
         </form>
       </section>
-       <button class="btn btn-primary" type="submit" value="Submit">Send me my Thinker!</button>
+       <button class="btn btn-primary" type="submit" value="Submit">Send me my Thinker!
+       </button>
 
-    </body>
-  </div>
+<!-- This is the aside/drop down segment for the right-hand column -->
+
+<div class="infobox infobox-alert s4s">
+           <p><strong>Get a free RethinkDB T-shirt</strong></p>
+           <p>Tell us how you're using RethinkDB. We're trading <a
+                    href="/community/shirts-for-stories">shirts for
+                    stories</a>.
+          </p>
+      </div> 
+
+
+
+
+
+
+
+
+
+  </body>
 </html>
