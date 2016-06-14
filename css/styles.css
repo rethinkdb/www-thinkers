@@ -1,0 +1,82 @@
+
+<style>
+#header {
+    background-color:black;
+    color:white;
+    text-align:center;
+}
+
+h1 {
+	padding:10px 0px 0px 15px;
+}
+h2 {
+	padding:5px 0px 0px 15px;
+}
+
+h3 {
+	padding:0px 0px 0px 15px;
+	font-size: .7em;
+}
+
+aside {
+
+}
+
+
+.btn-primary {
+	width: 150px;
+	height: 30px;
+	margin-left:15px;
+}
+body{
+	font: 50 1.1rem/3rem; 
+	font-family:"freight-sans-pro";
+	color: #333;
+}
+
+input.submit {
+	border: 10px;
+	margin: 50px;
+}
+.container-fluid {
+	margin: 0px 0px 0px 50px;
+}
+
+
+form {
+        margin-top: 10px;
+        line-height:26px;
+        padding-left:15px;
+        	ul { margin: 0; }
+        	li {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            display: inline-block;
+            list-style-type: none;
+            width: 38%;
+            margin: 0 8px 20px 0;
+
+            vertical-align: top;
+            &.button { width: auto;
+            padding: 10px 0px 10px 10px; }
+        }
+}
+
+form .form-control {
+	width: 200px;
+}
+
+}
+#section {
+    width:350px;
+    float:left;
+    padding:10px; 
+}
+#footer {
+    background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px; 
+}
+</style>
