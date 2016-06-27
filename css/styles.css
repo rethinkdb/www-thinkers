@@ -4,16 +4,10 @@
     text-align:center;
 }
 
-h1 {
-	padding:10px 0px 0px 15px;
-}
-h2 {
-	padding:5px 0px 0px 15px;
-}
 
 h3 {
-	padding:0px 0px 0px 15px;
-	font-size: .7em;
+	font-size: 1em;
+  color: #6b6b6b;
 }
 
 aside {
@@ -24,10 +18,11 @@ aside {
 .btn-primary {
 	width: 150px;
 	height: 30px;
-	margin-left:15px;
+  background-color: #d9007d;
+  margin-top: 20px;
 }
 body{
-	font: 50 1.1rem/3rem; 
+	font: 50 1.1rem/3rem;
 	font-family:"freight-sans-pro";
 	color: #333;
 }
@@ -38,13 +33,13 @@ input.submit {
 }
 .container-fluid {
 	margin: 0px 0px 0px 50px;
+  padding-left: 15px;
 }
 
 
 form {
         margin-top: 10px;
         line-height:26px;
-        padding-left:15px;
         	ul { margin: 0; }
         	li {
             -webkit-font-smoothing: antialiased;
@@ -69,16 +64,27 @@ form {
 
 
 
+#info-container {
+  float: right;
+  margin-top: 30px;
+  width: 20%;
+  border:2px;
+  border-style: solid;
+  border-color: #d4d3d3;
+  adding: 1em;
+  margin-right: 60px;
+  padding: 20px;
 }
+
 #section {
     width:350px;
     float:left;
-    padding:10px; 
+    padding:10px;
 }
 #footer {
     background-color:black;
     color:white;
     clear:both;
     text-align:center;
-    padding:5px; 
+    padding:5px;
 }
