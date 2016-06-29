@@ -1,18 +1,30 @@
+h2 {
+	margin bottom: 0;
+	pading-bottom: 0;
+}
+
 h3 {
 	font-size: 1em;
   color: #6b6b6b;
+	display: inline;
 }
 
 .btn-primary {
-	width: 150px;
-	height: 30px;
+	width: 160px;
+	height: 35px;
   background-color: #7bd2bb;
   margin-top: 20px;
+	border: 1px solid #6EBDA8;
+	border-bottom: 2px solid #63AA97;
+	border-radius: 4px;
+	font-family: "freight-sans-bold"
+	font-size: 1.5em;
+	color: white;
 }
 
 body{
-	font: 50 1.1rem/3rem;
-	font-family:"freight-sans-pro";
+	font: 50 1.1/2rem;
+	font-family: "freight-sans-pro";
 	color: #333;
 }
 
@@ -40,10 +52,11 @@ button.accordion {
   outline: none;
   transition: 0.4s;
   padding: 0;
+	display: inline;
 }
 
 div.panel {
-    padding: none;
+    padding: 0;
     background-color: white;
     display: none;
 }
