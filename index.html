@@ -13,7 +13,7 @@
     </head>
   <body>
      <div class="container-fluid">
-      <script src="js/thinker-dolls.js"></script>
+      <script src="functions.js"></script>
           <header class="hero">
               <h1>Support RethinkDB, get a Thinker doll!</h1>
               <img src="assets/woofoo-banner.png" style="height:300px;">
@@ -49,7 +49,12 @@
 
                    <h2>Tell us where to send your Thinker:</h2>
 
-                   <h3>We can't ship Thinkers outside the continental U.S. Sorry!</h3>
+
+
+                     <h3>We can't ship Thinker's outside the continental U.S. Sorry!</h3><button class="accordion">(Find out why)</button>
+                        <div class="panel">
+                            <p>Due to high shipping costs and customs, we cannot send thinkers outside of the United states.  Thank you for your understanding.</p>
+                        </div>
 
 
            <section class="form">
@@ -85,7 +90,17 @@
               <button class="btn btn-primary" type="submit" value="Submit">Send me my Thinker!</button>
  </div>
 
-<!-- This is the aside/drop down segment for the right-hand column -->
+ <script>
+ var acc = document.getElementsByClassName("accordion");
+ var i;
+
+ for (i = 0; i < acc.length; i++) {
+     acc[i].onclick = function(){
+         this.classList.toggle("active");
+         this.nextElementSibling.classList.toggle("show");
+     }
+ }
+ </script>
 
 
   </body>

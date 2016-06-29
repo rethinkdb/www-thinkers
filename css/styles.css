@@ -3,13 +3,13 @@ h3 {
   color: #6b6b6b;
 }
 
-
 .btn-primary {
 	width: 150px;
 	height: 30px;
   background-color: #7bd2bb;
   margin-top: 20px;
 }
+
 body{
 	font: 50 1.1rem/3rem;
 	font-family:"freight-sans-pro";
@@ -20,17 +20,37 @@ input.submit {
 	border: 10px;
 	margin: 50px;
 }
+
 .container-fluid {
   max-width: 926px;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 50px;
-  padding: 0 2rem;
+  padding: 0rem;
   position: relative;
   box-sizing: inherit;
 }
 
+button.accordion {
+  color: #27a5cd;
+  background-color: white;
+  cursor: pointer;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+  padding: 0;
+}
 
+div.panel {
+    padding: none;
+    background-color: white;
+    display: none;
+}
+
+div.panel.show {
+  display: block !important;
+}
 
 form {
         margin-top: 10px;
