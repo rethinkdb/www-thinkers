@@ -1,0 +1,101 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <title>Thinker Doll Signup</title>
+      <meta name="description" content="Thinker Doll Signup">
+
+      <link rel="stylesheet" href="css/styles.css?">
+
+      <!-- Web fonts -->
+      <script src="https://use.typekit.net/jbu2fes.js"></script>
+      <script>try{Typekit.load({ async: true });}catch(e){}</script>
+
+      <!-- JavaScript -->
+      <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js"></script>
+      <script src="site.js"></script>
+  </head>
+  <body>
+   <div class="container-fluid">
+          <header class="hero">
+              <h1>Support RethinkDB, get a Thinker doll!</h1>
+              <img src="assets/woofoo-banner.png">
+          </header>
+
+          <section id="info">
+            <div class="info-container">
+                <h3>Who is the Thinker?</h3>
+                <p>The Thinker is the face of RethinkDB, and our resident mascot (now available in huggable, squeezable doll form!).</p>
+            </div>
+
+            <div class="info-container2">
+                <h3>Support RethinkDB on GitHub.</h3>
+                <p>Haven't starred us yet?  You can do so <a href="https://www.github.com/rethinkdb">here</a>.</p>
+            </div>
+         </section>
+
+          <section class="user-info form-section">
+            <header>
+                <h1>Tell us a little about yourself:</h1>
+            </header>
+                <form>
+                   <div>
+                       <input type="text" name="name" placeholder="Name (required)"/>
+                   </div>
+                   <div>
+                       <input type="text" name="handle" placeholder="Github handle (required)"/>
+                   </div>
+                   <div>
+                       <input type="text" name="email" placeholder="Email address (required)"/>
+                   </div>
+               </form>
+        </section>
+              
+ 
+               <section class="shipping-thinker form-section">
+                    <header>
+                       <h1>Tell us where to send your Thinker:</h1>
+                        <h2>* We can't ship Thinkers outside the continental U.S. Sorry!</h2>
+                        <button class="show-popup"> (Find out why)</button>
+                        <div class="panel">
+                            <p>Shipping is limited at this time due to high shipping costs and customs fees.  Thank you for your understanding!</p>
+                        </div>
+                    </header>
+
+
+                   <form>
+                       <div>
+                           <input type="text" name="address1" placeholder="Address 1 (required)" />
+                      </div>
+                      <div>
+                           <input type="text" name="address2" placeholder="Address 2"/>
+                      </div>
+                      <div>
+                           <input type="text" name="city" placeholder="City (required)"/>
+                      </div>
+                      <div>
+                           <select name="state" placeholder="State">
+                           <option value="State (required)">State</option>
+                           <option value="CA">CA</option>
+                           <option value="TN">TN</option>
+                           <option value="UT">UT</option>
+                           <option value="NY">NY</option>
+                           <option value="OR">OR</option>
+                           </select>
+                     </div>
+                     <div>
+                          <input type="text" id="zip" placeholder="Zip code (required)"/>
+                     </div>
+                     <div>
+                         <textarea class="special-notes" cols="65" rows="4" placeholder="Special notes?"></textarea>
+                     </div>
+
+                  </form>
+              </section>
+
+            <button class="submit-form" input type="submit" value="Submit">Send me my Thinker!</button>
+  </div>
+  </body>
+</html>
