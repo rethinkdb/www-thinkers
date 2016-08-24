@@ -9,10 +9,10 @@ $(document).ready(function() {
     var acc = document.getElementsByClassName("show-popup");
     var i;
     for (i = 0; i < acc.length; i++) {
-       acc[i].onclick = function(){
-           this.classList.toggle("active");
-           this.nextElementSibling.classList.toggle("show");
-       }
+        acc[i].onclick = function() {
+            this.classList.toggle("active");
+            this.nextElementSibling.classList.toggle("show");
+        }
     }
 
     // $('.some-class').click(function() {
@@ -23,14 +23,14 @@ $(document).ready(function() {
     - TODO: add required fields to `name` */
     $(".user-info form").validate({
         rules: {
-            name: { 
+            name: {
                 required: true,
                 minlength: 2
             },
-            handle: { 
+            handle: {
                 required: true
             },
-            email: { 
+            email: {
                 required: true,
                 email: true
             },
@@ -49,23 +49,24 @@ $(document).ready(function() {
     // Collect shipping details from user.
     $(".shipping-thinker form").validate({
         rules: {
-            address1: { 
+            address1: {
                 required: true
             },
-            city: { 
+            city: {
                 required: true
             },
-            zip: { 
+            zip: {
                 required: true,
                 zipcode: true
-            },
+            }
         }
     });
+});
 
-    /*  TODO: add a click handler for the forms
+/*  TODO: add a click handler for the forms
         Here's what we had before (but we need to specify a handler):
             $(".btn").click();
-    
+
         $(document).ready(function(){
         $("button").click(function(){
             alert("foo")
@@ -74,9 +75,5 @@ $(document).ready(function() {
         }); */
 
 /* Practice
-
-*/
-
-})
-})
-});
+ 
+ */
