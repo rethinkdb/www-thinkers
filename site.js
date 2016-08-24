@@ -42,20 +42,22 @@ $(document).ready(function() {
         }
     });
 
+    jQuery.validator.addMethod("zipcode", function(value, element) {
+        return this.optional(element) || /^\d{5}(?:-\d{4})?$/.test(value);
+    }, "Please provide a valid zipcode.");
+
     // Collect shipping details from user.
     $(".shipping-thinker form").validate({
         rules: {
             address1: { 
                 required: true
             },
-            address2: { 
-                required: true
-            },
             city: { 
                 required: true
             },
             zip: { 
-                required: true
+                required: true,
+                zipcode: true
             },
         }
     });
@@ -63,6 +65,18 @@ $(document).ready(function() {
     /*  TODO: add a click handler for the forms
         Here's what we had before (but we need to specify a handler):
             $(".btn").click();
-    */
+    
+        $(document).ready(function(){
+        $("button").click(function(){
+            alert("foo")
+            $(".submit").load("file:///Users/Lindsey/Git/www-thinkers/complete.html");
+            });
+        }); */
 
+/* Practice
+
+*/
+
+})
+})
 });
