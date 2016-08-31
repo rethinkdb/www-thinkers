@@ -6,41 +6,38 @@ const USERS = new Map();
 // Look up whether the user has starred the project
 function lookupUser(username, element) {
 
-  if (USERS.has(username)) {
-    return USERS.get(username);
-  } else {
-    fetch(`https://api.github.com/users/${username}`, {
-      headers: {
-        Authorization: "token b11c2a18a89fc318350949cfdacb67646c61c1b0",
-      },
-    })
-    .then(function(response) {
-      const result = response.status === 200 || response.status === 304;
-      console.log("SUCCESS", result);
-      USERS.set(username, result);
-      $(element).trigger("blur");
+    if (USERS.has(username)) {
+        return USERS.get(username);
+    } else {
+        fetch(`https://api.github.com/users/${username}`, {
+                headers: {
+                    Authorization: "token b11c2a18a89fc318350949cfdacb67646c61c1b0",
+                },
+            })
+            .then(function(response) {
+                const result = response.status === 200 || response.status === 304;
+                console.log("SUCCESS", result);
+                USERS.set(username, result);
+                $(element).trigger("blur");
 
-    }).catch((err) => {
-      console.log("ERROR", err);
-      USERS.set(username, false);
-      $(element).trigger("blur");
-    });
+            }).catch((err) => {
+                console.log("ERROR", err);
+                USERS.set(username, false);
+                $(element).trigger("blur");
+            });
 
-    return true;
-  }
+        return true;
+    }
 }
 
 $(document).ready(function() {
     // Show info popup
     // TODO: consider rewriting this to use jQuery's functions to make things a bit easier
-    var acc = document.getElementsByClassName("show-popup");
-    var i;
-    for (i = 0; i < acc.length; i++) {
-        acc[i].onclick = function() {
-            this.classList.toggle("active");
-            this.nextElementSibling.classList.toggle("show");
-        }
-    }
+    let acc = document.getElementsByClassName("show-popup");
+    acc[0].onclick = function() {
+        this.classList.toggle("active");
+        this.nextElementSibling.classList.toggle("show");
+    };
 
     // $('.some-class').click(function() {
     //     $('.popup', $(this).parent()).toggleClass('active');
@@ -48,11 +45,19 @@ $(document).ready(function() {
     /* Collect personal details from user:
     - validate and submit form on input
     - TODO: add required fields to `name` */
-    $.validator.addMethod("githubUsernameCheck", function (value, element) {
+    $.validator.addMethod("githubUsernameCheck", function(value, element) {
         return lookupUser(value, element);
     }, 'Please provide a valid Github handle.');
 
-    $(".user-info form").validate({
+    $.validator.addMethod("stateCheck", function(value, element) {
+        return value !== "State"
+    }, 'Please select a state.');
+
+    jQuery.validator.addMethod("zipcode", function(value, element) {
+        return this.optional(element) || /^\d{5}(?:-\d{4})?$/.test(value);
+    }, "Please provide a valid zipcode.");
+
+    $(".form-container form").validate({
         onkeyup: false,
         rules: {
             name: {
@@ -65,24 +70,12 @@ $(document).ready(function() {
             },
             email: {
                 required: true,
-                email: true
+                email: true,
             },
-            messages: {
-                github: {
-                    required: "Please enter a Github username",
-                    // depends: "Please provide a valid Github username",
-                }
-            }
-        }
-    });
-
-    jQuery.validator.addMethod("zipcode", function(value, element) {
-        return this.optional(element) || /^\d{5}(?:-\d{4})?$/.test(value);
-    }, "Please provide a valid zipcode.");
-
-    // Collect shipping details from user.
-    $(".shipping-thinker form").validate({
-        rules: {
+            state: {
+                required: true,
+                stateCheck: true,
+            },
             address1: {
                 required: true
             },
@@ -92,6 +85,12 @@ $(document).ready(function() {
             zip: {
                 required: true,
                 zipcode: true
+            },
+            messages: {
+                github: {
+                    required: "Please enter a Github username",
+                    // depends: "Please provide a valid Github username",
+                }
             }
         }
     });
