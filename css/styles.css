@@ -4,6 +4,7 @@
     max-width: 100%;
 }
 
+
 /* Main sections */
 
 body {
@@ -11,6 +12,7 @@ body {
     font-family: "freight-sans-pro";
     color: #333;
 }
+
 .form-container {
     /*display:flex;
     flex-direction: column;*/
@@ -20,6 +22,7 @@ body {
     /*justify-content: space-around;*/
     /*width: 45%;*/
 }
+
 
 /*.container-fluid {
     max-width: 926px;
@@ -53,9 +56,11 @@ body {
     /*margin-right: 0px;*/
     padding: 20px;
 }
+
 .info-container h3 {
     margin: 0px 0px 0px 0px;
 }
+
 
 /* Section styles */
 
@@ -63,11 +68,13 @@ body {
     margin-bottom: 0;
     font-size: 16pt;
 }
+
 .form-section h2 {
     font-size: 1em;
     color: #6b6b6b;
     display: inline;
 }
+
 
 /*.container {
     display:flex;
@@ -81,6 +88,7 @@ body {
     /*white-space: nowrap;*/
 }
 
+
 /* Form styles */
 
 .user {
@@ -88,46 +96,57 @@ body {
     clear: both;
     display: block;
 }
+
 form {
     margin-top: 10px;
     /*overflow: hidden;*/
     /*white-space: nowrap;*/
 }
+
 input, textarea, select {
     font-family: "freight-sans-pro", sans-serif;
     font-size: 18px;
     margin-bottom: 10px;
 }
+
 form label.error {
     color: red;
     font-size: small;
     padding-left: 1em;
     display: inline-block;
 }
+
 input {
     min-width: 20em;
 }
+
 input.submit {
     border: 10px;
     margin: 50px;
 }
+
 div.zip-code {
     display: inline !important;
 }
+
 .zip-code {
     padding-left: 15px;
 }
+
 .zip-x {
     min-width: 40px;
 }
+
 .state {
     padding-bottom: 4px;
 }
+
 .state-zip {
     display: flex;
     flex-direction: row;
     max-width: 50px;
 }
+
 button.show-popup {
     color: #27a5cd;
     background-color: white;
@@ -143,14 +162,17 @@ button.show-popup {
     text-decoration: none;
     font-weight: normal;
 }
+
 div.panel {
     padding: 0;
     background-color: white;
     display: none;
 }
+
 div.panel.show {
     display: block !important;
 }
+
 
 /* Complete page (after button submit) */
 
@@ -163,10 +185,12 @@ a {
     transition: color .2s ease-out, background 2s ease-in;
     text-decoration: none;
 }
+
 a:hover {
     color: black;
     background: white;
 }
+
 ul#links {
     list-style-type: none;
     line-height: 22px;
@@ -174,6 +198,7 @@ ul#links {
     text-align: left;
     border-left: 1px solid #eee;
 }
+
 #footer {
     background-color: black;
     color: white;
@@ -181,6 +206,8 @@ ul#links {
     text-align: center;
     padding: 5px;
 }
+
+
 
 /* Button: submit form */
 
@@ -194,4 +221,17 @@ ul#links {
     font-size: 1.1em;
     color: white;
     min-width: 0px;
+}
+
+.popup {
+    transition: left 0.4s ease-out;
+    visibility: visible;
+    left: 0%;
+    overflow: visible;
+    position:relative;
+}
+
+.popup.hidden {
+    visibility: hidden;
+    left: 100px;
 }

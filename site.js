@@ -18,6 +18,7 @@ function lookupUser(username, element) {
             console.log("SUCCESS", result);
             USERS.set(username, result);
             $(element).trigger("blur");
+
             // Check if any items that have been starred is rethinkdb/rethinkdb
             const checkIfStarredRethinkDB = (items) => {
               let result = false;
@@ -32,8 +33,10 @@ function lookupUser(username, element) {
             // Function for getting the 'next' page out of Github's weird pagination
             const getNextPage = (headers) => {
               let nextPage;
+              if (!headers.has('Link')) return nextPage;
               headers.get('Link').split(',').forEach((index) => {
                 if (index.indexOf('next') > -1){
+                  console.log(index);
                   const rawURL = index.split(';')[0];
                   nextPage = rawURL.slice(1, rawURL.length - 1);
                   console.log("nextPage", nextPage);
@@ -53,8 +56,6 @@ function lookupUser(username, element) {
                         console.log("THANKS FOR STARRING US!, BEGIN")
                         return
                       }
-                      console.log(data);
-                      console.log(response);
                       let next_page = getNextPage(response.headers);
                       let count = 1;
 
@@ -62,9 +63,6 @@ function lookupUser(username, element) {
                         () => { return next_page },
                         (cb) => {
                           fetch(next_page).then((response) => {
-
-                            console.log('count', count)
-                            console.log('response', response);
                             if (response.status === 200){
                                 count++;
                                 // Check if next page
@@ -75,6 +73,7 @@ function lookupUser(username, element) {
                                   if (checkIfStarredRethinkDB(data)){
                                     // They have starred us!
                                     console.log("THANKS FOR STARRING US!")
+                                    $('.popup').removeClass('hidden');
 
                                     // Stop running, signal by setting next_page to undefined
                                     next_page = undefined;
@@ -98,6 +97,9 @@ function lookupUser(username, element) {
                       );
                     });
                     console.log("PLEASE STAR US! END")
+                    const popup = $('.popup');
+                    popup.html(`<h1>Hey Please star Us!</h1>`);
+                    popup.removeClass('hidden');
                     return
                   };
               });
