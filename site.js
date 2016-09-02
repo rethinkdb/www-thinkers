@@ -10,21 +10,103 @@ function lookupUser(username, element) {
         return USERS.get(username);
     } else {
         fetch(`https://api.github.com/users/${username}`, {
-                headers: {
-                    Authorization: "token b11c2a18a89fc318350949cfdacb67646c61c1b0",
-                },
-            })
-            .then(function(response) {
-                const result = response.status === 200 || response.status === 304;
-                console.log("SUCCESS", result);
-                USERS.set(username, result);
-                $(element).trigger("blur");
+            headers: {
+                Authorization: "token b11c2a18a89fc318350949cfdacb67646c61c1b0",
+            },
+        }).then(function(response) {
+            const result = response.status === 200 || response.status === 304;
+            console.log("SUCCESS", result);
+            USERS.set(username, result);
+            $(element).trigger("blur");
+            // Check if any items that have been starred is rethinkdb/rethinkdb
+            const checkIfStarredRethinkDB = (items) => {
+              let result = false;
+              items.forEach((item) => {
+                  if (item.full_name.toLowerCase() === "rethinkdb/rethinkdb"){
+                    result = true;
+                  };
+              });
+              return result;
+            };
 
-            }).catch((err) => {
-                console.log("ERROR", err);
-                USERS.set(username, false);
-                $(element).trigger("blur");
-            });
+            // Function for getting the 'next' page out of Github's weird pagination
+            const getNextPage = (headers) => {
+              let nextPage;
+              headers.get('Link').split(',').forEach((index) => {
+                if (index.indexOf('next') > -1){
+                  const rawURL = index.split(';')[0];
+                  nextPage = rawURL.slice(1, rawURL.length - 1);
+                  console.log("nextPage", nextPage);
+                  return;
+                }
+              });
+              return nextPage;
+            };
+
+            // Only search for if we've starred if result is successful
+            if (result) {
+              fetch(`https://api.github.com/users/${username}/starred`).then((response) => {
+                if (response.status === 200 || response.status === 304) {
+                    response.json().then((data) => {
+                      if (checkIfStarredRethinkDB(data)){
+                        // Thanks for starring us on Github
+                        console.log("THANKS FOR STARRING US!, BEGIN")
+                        return
+                      }
+                      console.log(data);
+                      console.log(response);
+                      let next_page = getNextPage(response.headers);
+                      let count = 1;
+
+                      async.whilst(
+                        () => { return next_page },
+                        (cb) => {
+                          fetch(next_page).then((response) => {
+
+                            console.log('count', count)
+                            console.log('response', response);
+                            if (response.status === 200){
+                                count++;
+                                // Check if next page
+                                next_page = getNextPage(response.headers);
+
+                                response.json().then((data) => {
+                                  // Check body
+                                  if (checkIfStarredRethinkDB(data)){
+                                    // They have starred us!
+                                    console.log("THANKS FOR STARRING US!")
+
+                                    // Stop running, signal by setting next_page to undefined
+                                    next_page = undefined;
+                                    cb(null, true);
+                                  } else {
+                                    cb(null, false);
+                                  }
+                                }).catch((err) => {
+                                  cb(err, false);
+                                });
+                            } else {
+                              console.log("ERROR", response.status_code);
+                              cb(null, false);
+                            }
+                          }).catch((err) => { cb(err, false) });
+                        },
+                        (err, final) => {
+                          console.log('final', final)
+                          return
+                        }
+                      );
+                    });
+                    console.log("PLEASE STAR US! END")
+                    return
+                  };
+              });
+            }
+        }).catch((err) => {
+            console.log("ERROR", err);
+            USERS.set(username, false);
+            $(element).trigger("blur");
+        });
 
         return true;
     }
