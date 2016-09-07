@@ -14,104 +14,123 @@ function lookupUser(username, element) {
                 Authorization: "token b11c2a18a89fc318350949cfdacb67646c61c1b0",
             },
         }).then(function(response) {
-            const result = response.status === 200 || response.status === 304;
+            const result = response.status === 200;
             console.log("SUCCESS", result);
             USERS.set(username, result);
             $(element).trigger("blur");
+            checkIfStarred(username);
 
-            // Check if any items that have been starred is rethinkdb/rethinkdb
-            const checkIfStarredRethinkDB = (items) => {
-              let result = false;
-              items.forEach((item) => {
-                  if (item.full_name.toLowerCase() === "rethinkdb/rethinkdb"){
-                    result = true;
-                  };
-              });
-              return result;
-            };
-
-            // Function for getting the 'next' page out of Github's weird pagination
-            const getNextPage = (headers) => {
-              let nextPage;
-              if (!headers.has('Link')) return nextPage;
-              headers.get('Link').split(',').forEach((index) => {
-                if (index.indexOf('next') > -1){
-                  console.log(index);
-                  const rawURL = index.split(';')[0];
-                  nextPage = rawURL.slice(1, rawURL.length - 1);
-                  console.log("nextPage", nextPage);
-                  return;
-                }
-              });
-              return nextPage;
-            };
-
-            // Only search for if we've starred if result is successful
-            if (result) {
-              fetch(`https://api.github.com/users/${username}/starred`).then((response) => {
-                if (response.status === 200 || response.status === 304) {
-                    response.json().then((data) => {
-                      if (checkIfStarredRethinkDB(data)){
-                        // Thanks for starring us on Github
-                        console.log("THANKS FOR STARRING US!, BEGIN")
-                        return
-                      }
-                      let next_page = getNextPage(response.headers);
-                      let count = 1;
-
-                      async.whilst(
-                        () => { return next_page },
-                        (cb) => {
-                          fetch(next_page).then((response) => {
-                            if (response.status === 200){
-                                count++;
-                                // Check if next page
-                                next_page = getNextPage(response.headers);
-
-                                response.json().then((data) => {
-                                  // Check body
-                                  if (checkIfStarredRethinkDB(data)){
-                                    // They have starred us!
-                                    console.log("THANKS FOR STARRING US!")
-                                    $('.popup').removeClass('hidden');
-
-                                    // Stop running, signal by setting next_page to undefined
-                                    next_page = undefined;
-                                    cb(null, true);
-                                  } else {
-                                    cb(null, false);
-                                  }
-                                }).catch((err) => {
-                                  cb(err, false);
-                                });
-                            } else {
-                              console.log("ERROR", response.status_code);
-                              cb(null, false);
-                            }
-                          }).catch((err) => { cb(err, false) });
-                        },
-                        (err, final) => {
-                          console.log('final', final)
-                          return
-                        }
-                      );
-                    });
-                    console.log("PLEASE STAR US! END")
-                    const popup = $('.popup');
-                    popup.html(`<h1>Hey Please star Us!</h1>`);
-                    popup.removeClass('hidden');
-                    return
-                  };
-              });
-            }
         }).catch((err) => {
             console.log("ERROR", err);
             USERS.set(username, false);
             $(element).trigger("blur");
         });
-
-        return true;
     }
+    return true;
+}
+
+const checkIfRethinkDBInList = (items) => {
+    let result = false;
+    items.forEach((item) => {
+        if (item.full_name.toLowerCase() === "rethinkdb/rethinkdb") {
+            result = true;
+        };
+    });
+    return result;
+};
+
+// Function for getting the 'next' page out of Github's weird pagination
+const getNextPage = (headers) => {
+    let nextPage;
+    if (!headers.has('Link')) return nextPage;
+    headers.get('Link').split(',').forEach((index) => {
+        if (index.indexOf('next') > -1) {
+            const rawURL = index.split(';')[0];
+            nextPage = rawURL.slice(1, rawURL.length - 1);
+            console.log("nextPage", nextPage);
+            return;
+        }
+    });
+    return nextPage;
+};
+
+const popupMessageBox = (result) => {
+  const popup = $('.popup');
+  if (result) {
+      popup.removeClass('hidden');
+      popup.html(`
+        <h3>It looks like you've starred us on GitHub!</h3>
+        <p>Thanks for your support 😀.</p>
+      `);
+  } else {
+      popup.removeClass('hidden');
+      popup.html(`
+        <h3>Support RethinkDB on GitHub.</h3>
+        <p>Haven't starred us yet? You can do so <a href="https://www.github.com/rethinkdb">here</a>.</p>
+      `);
+  }
+}
+
+function checkIfStarred(username) {
+    // Fetch initial page of starred repos for users
+    fetch(`https://api.github.com/users/${username}/starred`).then((response) => {
+        if (response.status === 200) {
+
+            // Turn initial response into JSON
+            response.json().then((data) => {
+
+                let next_page = getNextPage(response.headers);
+
+                // Check if rethinkdb in initial starred repos page
+                if (checkIfRethinkDBInList(data)) {
+                    // Thanks for starring us on Github
+                    popupMessageBox(true);
+                    // They did star us
+                    next_page = false;
+                    return
+                }
+
+                let userStarred = false;
+                async.whilst(
+                    () => {
+                        return next_page;
+                    },
+                    (cb) => {
+                        // Fetch next page in starred repos list
+                        fetch(next_page).then((response) => {
+                            if (response.status === 200) {
+                                // Check if next page
+                                next_page = getNextPage(response.headers);
+
+                                // Turn results in JSON
+                                response.json().then((data) => {
+                                    // Check body
+                                    if (checkIfRethinkDBInList(data)) {
+                                        // They have starred us!
+                                        console.log("THANKS FOR STARRING US!");
+
+                                        // Stop running, signal by setting next_page to undefined
+                                        next_page = undefined;
+                                        userStarred = true;
+                                        cb(null, true);
+                                    } else {
+                                        cb(null, false);
+                                    }
+                                });
+                            } else {
+                                console.log("ERROR");
+                                cb(null, false);
+                            }
+                        });
+                    },
+                    (err, last) => {
+                        // Check if they've starred, change text as necessary
+                        popupMessageBox(userStarred);
+                    }
+                );
+            });
+        }
+    });
 }
 
 $(document).ready(function() {
@@ -123,12 +142,6 @@ $(document).ready(function() {
         this.nextElementSibling.classList.toggle("show");
     };
 
-    // $('.some-class').click(function() {
-    //     $('.popup', $(this).parent()).toggleClass('active');
-    // })
-    /* Collect personal details from user:
-    - validate and submit form on input
-    - TODO: add required fields to `name` */
     $.validator.addMethod("githubUsernameCheck", function(value, element) {
         return lookupUser(value, element);
     }, 'Please provide a valid Github handle.');
