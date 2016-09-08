@@ -4,6 +4,8 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Thinker Doll Signup</title>
     <meta name="description" content="Thinker Doll Signup">
     <link rel="stylesheet" href="css/normalize.css">
@@ -14,7 +16,7 @@
 
 <body>
     <div class="container">
-      
+
         <div class="row">
             <header class="hero">
                 <h1>Support RethinkDB, get a Thinker doll!</h1>
@@ -22,6 +24,24 @@
             </header>
         </div>
         <div class="row">
+            <div id="info-containers" class="five columns">
+                <!-- Side bar boxes -->
+                <section id="info">
+                    <div class="info-container info1">
+                        <header>
+                            <h3>Who is the Thinker?</h3>
+                            <p>The Thinker is the face of RethinkDB and our resident mascot (now available in huggable, squeezable doll form!).</p>
+                        </header>
+                    </div>
+
+                    <div class="info-container info2 popup hidden">
+                        <header>
+                            <h3>Support RethinkDB on GitHub.</h3>
+                            <p>Haven't starred us yet? You can do so <a href="https://www.github.com/rethinkdb">here</a>.</p>
+                        </header>
+                    </div>
+                </section>
+            </div>
             <div class="seven columns">
                 <!-- Input forms -->
                 <section class="form-container">
@@ -68,12 +88,12 @@
                                 <input type="text" name="city" placeholder="City (required)" />
                             </div>
                             <div class="zip u-full-width">
-                              <div class="state-zip">
-                                  <div>
-                                      <div class="state">
-                                          <label for="state" class="user">State:</label>
-                                      </div>
-                                      <select name="state">
+                                <div class="state-zip">
+                                    <div>
+                                        <div class="state">
+                                            <label for="state" class="user">State:</label>
+                                        </div>
+                                        <select name="state">
                                           <option value="State">State</option>
                                           <option value="AL">AL</option>
                                           <option value="AK">AK</option>
@@ -128,39 +148,21 @@
                                           <option value="WY">WY</option>
                                       </select>
 
-                                  </div>
-                                  <div class="zip-code">
-                                      <label for="zip" class="user">Zip Code:</label>
-                                      <input class="zip-x" type="text" name="zip" placeholder="Zip code (required)" />
-                                  </div>
-                              </div>
+                                    </div>
+                                    <div class="zip-code">
+                                        <label for="zip" class="user">Zip Code:</label>
+                                        <input class="zip-x" type="text" name="zip" placeholder="Zip code (required)" />
+                                    </div>
+                                </div>
                             </div>
                             <div>
                                 <label for="notes" class="user">Special Notes?</label>
                                 <textarea class="special-notes" cols="65" rows="4" placeholder="Special notes?"></textarea>
                             </div>
 
-                            <input class="submit-form" type="submit" value="Send me my Thinker!">
+                            <input id="submit-form" type="submit" value="Send me my Thinker!">
                     </form>
                     </section>
-                </section>
-            </div>
-            <div class="five columns">
-                <!-- Side bar boxes -->
-                <section id="info">
-                    <div class="info-container info1">
-                        <header>
-                            <h3>Who is the Thinker?</h3>
-                            <p>The Thinker is the face of RethinkDB, and our resident mascot (now available in huggable, squeezable doll form!).</p>
-                        </header>
-                    </div>
-
-                    <div class="info-container info2 popup hidden">
-                        <header>
-                            <h3>Support RethinkDB on GitHub.</h3>
-                            <p>Haven't starred us yet? You can do so <a href="https://www.github.com/rethinkdb">here</a>.</p>
-                        </header>
-                    </div>
                 </section>
             </div>
         </div>

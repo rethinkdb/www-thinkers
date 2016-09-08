@@ -13,6 +13,19 @@ body {
     color: #333;
 }
 
+/*h1, h2, h3, h4, h5 {
+  font-family: "freight-sans-pro", sans-serif;
+  font-size: 500;
+}
+
+h2 {
+  font-size: 1.6em;
+}
+
+h3 {
+  font-size: 1.4em;
+}*/
+
 .form-container {
     /*display:flex;
     flex-direction: column;*/
@@ -54,11 +67,18 @@ body {
     border-color: #f2eaf7;
     background-color: #f3effa;
     /*margin-right: 0px;*/
-    padding: 20px;
+    padding:10px 20px;
+    /*font-size: 1.2em;*/
+}
+
+.info-container p {
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .info-container h3 {
     margin: 0px 0px 0px 0px;
+    font-weight: 400;
 }
 
 
@@ -66,13 +86,18 @@ body {
 
 .form-section h1 {
     margin-bottom: 0;
-    font-size: 16pt;
+    /*font-size: 1.6em;*/
+    font-weight: 400;
 }
 
 .form-section h2 {
-    font-size: 1em;
+    /*font-size: 1.1em;*/
     color: #6b6b6b;
     display: inline;
+}
+
+.shipping-thinker {
+    margin-top: 50px;
 }
 
 
@@ -105,13 +130,13 @@ form {
 
 input, textarea, select {
     font-family: "freight-sans-pro", sans-serif;
-    font-size: 18px;
+    /*font-size: 18px;*/
     margin-bottom: 10px;
 }
 
 form label.error {
     color: red;
-    font-size: small;
+    /*font-size: small;*/
     padding-left: 1em;
     display: inline-block;
 }
@@ -135,10 +160,6 @@ div.zip-code {
 
 .zip-x {
     min-width: 40px;
-}
-
-.state {
-    padding-bottom: 4px;
 }
 
 .state-zip {
@@ -194,7 +215,7 @@ a:hover {
 ul#links {
     list-style-type: none;
     line-height: 22px;
-    font-size: 15px;
+    /*font-size: 15px;*/
     text-align: left;
     border-left: 1px solid #eee;
 }
@@ -211,14 +232,14 @@ ul#links {
 
 /* Button: submit form */
 
-.submit-form {
-    padding: 7px 15px;
+#submit-form {
     background-color: #7bd2bb;
     border: 1px solid #6EBDA8;
     border-bottom: 2px solid #63AA97;
     border-radius: 4px;
     font-family: "freight-sans-pro";
-    font-size: 1.1em;
+    /*font-size: 1.1em;*/
+    font-weight: normal;
     color: white;
     min-width: 0px;
 }
@@ -226,12 +247,34 @@ ul#links {
 .popup {
     transition: left 0.4s ease-out;
     visibility: visible;
+    display: block
     left: 0%;
     overflow: visible;
     position:relative;
 }
 
+
 .popup.hidden {
     visibility: hidden;
+    display:none;
     left: 100px;
+}
+
+#info-containers {
+  margin-bottom: 20px;
+}
+
+@media (min-width: 750px) {
+  #info-containers {
+    float:right;
+  }
+}
+
+/* Larger than tablet */
+@media (max-width: 750px) {
+
+
+  input {
+    width: 100%;
+  }
 }
